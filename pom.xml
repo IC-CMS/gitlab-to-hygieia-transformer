@@ -19,4 +19,48 @@
             <url>https://api.bintray.com/maven/ic-cms/Maven/gitlab-to-hygieia-transformer/;publish=1</url>
         </repository>
     </distributionManagement>
+    <parent>
+        <groupId>cms.sre</groupId>
+        <artifactId>spring-parent-pom</artifactId>
+        <version>1.0</version>
+    </parent>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <!-- Spring Boot Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+        </dependency>
+
+        <!-- Homegrown Dependencies -->
+        <dependency>
+            <groupId>cms.sre</groupId>
+            <artifactId>dna-common-data-model</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>cms.sre</groupId>
+            <artifactId>mongo-connection-helper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <!-- Testing Dependencies -->
+        <dependency>
+            <groupId>de.flapdoodle.embed</groupId>
+            <artifactId>de.flapdoodle.embed.mongo</artifactId>
+            <version>2.0.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
