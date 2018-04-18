@@ -9,39 +9,41 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
+@EnableReactiveMongoRepositories
 @PropertySource(value = "file:/data/gitlab-to-hygieia-transformer/configuration/application.properties", ignoreResourceNotFound = true)
 @SpringBootApplication()
 public class App extends AbstractMongoConfiguration {
     @Value("${mongodb.databaseName:#{null}}")
-    private String mongoDatabaseName;
+    protected String mongoDatabaseName;
 
     @Value("${mongodb.keyStoreKeyPassword:#{null}}")
-    private String mongoKeyStoreKeyPassword;
+    protected String mongoKeyStoreKeyPassword;
 
     @Value("${mongodb.keyStoreLocation:#{null}}")
-    private String mongoKeyStoreLocation;
+    protected String mongoKeyStoreLocation;
 
     @Value("${mongodb.keyStorePassword:#{null}}")
-    private String mongoKeyStorePassword;
+    protected String mongoKeyStorePassword;
 
     @Value("${mongodb.trustStoreLocation:#{null}}")
-    private String mongoTrustStoreLocation;
+    protected String mongoTrustStoreLocation;
 
     @Value("${mongodb.trustStorePassword:#{null}}")
-    private String mongoTrustStorePassword;
+    protected String mongoTrustStorePassword;
 
     @Value("${mongodb.username:#{null}}")
-    private String mongoUsername;
+    protected String mongoUsername;
 
     @Value("${mongodb.password:#{null}}")
-    private String mongoPassword;
+    protected String mongoPassword;
 
     @Value("${mongodb.replicaSetLocation:#{null}}")
-    private String[] mongoReplicaSetLocation;
+    protected String[] mongoReplicaSetLocation;
 
     @Value("${mongodb.mongoReplicaSetName:#{null}}")
-    private String mongoReplicaSetName;
+    protected String mongoReplicaSetName;
 
     private static String nullWrapper(String value){
         return value == null ? "(null)" : value;

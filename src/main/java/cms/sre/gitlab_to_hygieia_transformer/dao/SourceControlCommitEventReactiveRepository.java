@@ -10,4 +10,7 @@ import java.util.UUID;
 public interface SourceControlCommitEventReactiveRepository extends ReactiveCrudRepository<SourceControlCommitEvent, UUID> {
     @Tailable
     public Flux<SourceControlCommitEvent> findWithTailableCursorBy();
+
+    @Tailable
+    public Flux<SourceControlCommitEvent> findWithTailableCursorByLabelsNotIn(String label);
 }
