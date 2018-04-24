@@ -22,7 +22,7 @@
     <parent>
         <groupId>cms.sre</groupId>
         <artifactId>spring-parent-pom</artifactId>
-        <version>1.0</version>
+        <version>1.1.0</version>
     </parent>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,29 +32,23 @@
         <!-- Spring Boot Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.capitalone.dashboard</groupId>
-            <artifactId>gitlab-git-collector</artifactId>
-            <version>2.0.4</version>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!-- Homegrown Dependencies -->
         <dependency>
             <groupId>cms.sre</groupId>
             <artifactId>dna-common-data-model</artifactId>
-            <version>1.1.27</version>
+            <version>1.1.30</version>
         </dependency>
         <dependency>
             <groupId>cms.sre</groupId>
-            <artifactId>mongo-connection-helper</artifactId>
-            <version>1.1.0</version>
+            <artifactId>mongo-reactive-connection-helper</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
         <!-- Testing Dependencies -->

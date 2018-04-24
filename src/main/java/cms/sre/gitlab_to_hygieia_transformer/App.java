@@ -1,20 +1,31 @@
 package cms.sre.gitlab_to_hygieia_transformer;
 
-import cms.sre.mongo_connection_helper.MongoClientFactory;
-import cms.sre.mongo_connection_helper.MongoClientParameters;
-import com.mongodb.MongoClient;
+import cms.sre.mongo_reactive_connection_helper.MongoClientParameters;
+import cms.sre.mongo_reactive_connection_helper.MongoReactiveClientFactory;
+import com.mongodb.reactivestreams.client.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.mongo.MongoReactiveDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
+
+@SpringBootApplication(exclude = {MongoAutoConfiguration.class, MongoDataAutoConfiguration.class, MongoReactiveDataAutoConfiguration.class, MongoReactiveAutoConfiguration.class})
 @EnableReactiveMongoRepositories
 @PropertySource(value = "file:/data/gitlab-to-hygieia-transformer/configuration/application.properties", ignoreResourceNotFound = true)
-@SpringBootApplication()
-public class App extends AbstractMongoConfiguration {
+public class App extends AbstractReactiveMongoConfiguration {
+
+    public static void main(String[] args){
+        SpringApplication.run(App.class, args);
+    }
+
     @Value("${mongodb.databaseName:#{null}}")
     protected String mongoDatabaseName;
 
@@ -61,7 +72,7 @@ public class App extends AbstractMongoConfiguration {
     }
 
     @Override
-    public MongoClient mongoClient() {
+    public MongoClient reactiveMongoClient() {
         System.out.println();
         System.out.println();
         System.out.println("########################");
@@ -98,24 +109,21 @@ public class App extends AbstractMongoConfiguration {
         if(this.mongoReplicaSetLocation.length == 1 && this.mongoReplicaSetLocation[0].equalsIgnoreCase("localhost")){
             System.out.println("Connecting to Local Mongo");
             if(this.mongoUsername != null && this.mongoUsername.length() > 0 && this.mongoPassword != null && this.mongoPassword.length() > 0){
-                client = MongoClientFactory.getLocalhostMongoClient(this.mongoDatabaseName, this.mongoUsername, this.mongoPassword);
+                client = MongoReactiveClientFactory.getLocahostMongoClient(this.mongoDatabaseName, this.mongoUsername, this.mongoPassword);
             }else{
-                client = MongoClientFactory.getLocalhostMongoClient();
+                client = MongoReactiveClientFactory.getLocalhostMongoClient();
             }
         }else{
             System.out.println("Connecting to Remote Mongo");
 
-            client = MongoClientFactory.getMongoClient(params);
+            client = MongoReactiveClientFactory.getMongoClient(params);
         }
         return client;
     }
 
-    @Override
     protected String getDatabaseName() {
         return this.mongoDatabaseName;
     }
 
-    public static void main(String[] args){
-        SpringApplication.run(App.class, args);
-    }
+
 }

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cms.sre:dna-common-data-model:1.1.30">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cms/sre/dna-common-data-model/1.1.30/dna-common-data-model-1.1.30.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/cms/sre/dna-common-data-model/1.1.30/dna-common-data-model-1.1.30-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/cms/sre/dna-common-data-model/1.1.30/dna-common-data-model-1.1.30-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
