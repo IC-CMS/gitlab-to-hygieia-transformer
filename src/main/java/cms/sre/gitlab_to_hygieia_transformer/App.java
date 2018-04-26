@@ -56,6 +56,14 @@ public class App extends AbstractReactiveMongoConfiguration {
     @Value("${mongodb.mongoReplicaSetName:#{null}}")
     protected String mongoReplicaSetName;
 
+    @Value("${gitlab.classification:UNKNOWN}")
+    protected String gitlabClassification;
+
+    @Bean
+    public String classification(){
+        return this.gitlabClassification;
+    }
+
     private static String nullWrapper(String value){
         return value == null ? "(null)" : value;
     }

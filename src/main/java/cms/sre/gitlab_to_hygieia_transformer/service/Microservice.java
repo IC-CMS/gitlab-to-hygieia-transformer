@@ -17,6 +17,9 @@ import java.util.List;
 public class Microservice implements CommandLineRunner{
 
     @Autowired
+    private String classification;
+
+    @Autowired
     private SourceControlCommitEventReactiveRepository sourceControlCommitEventReactiveRepository;
 
     @Autowired
@@ -50,7 +53,7 @@ public class Microservice implements CommandLineRunner{
     public void incrementalUpkeep(){
         this.sourceControlCommitEventReactiveRepository.findWithTailableCursorBy()
                 .doOnNext(evt -> {
-                    GitlabCommitToHygieiaCommitEvent event = new GitlabCommitToHygieiaCommitEvent()
+                    GitlabCommitToHygieiaCommitEvent event = new GitlabCommitToHygieiaCommitEvent(this.classification, "gitlab-to-hygieia-transformer")
                             .setCommit(this.getCommit(evt))
                             .setCollectorItem(this.getCollectorItem(evt));
 
